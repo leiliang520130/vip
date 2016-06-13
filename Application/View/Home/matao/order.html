@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <title>预约信息</title>
+        <!-- 引入 WeUI -->
+        <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/0.4.2/weui.css"/>
+    </head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<br />
+<a href="http://phpweixin.itsource.cn/team13/index.php?p=Home&c=matao&a=addorder&name={$name}">
+    <input type="submit" class="weui_btn weui_btn_primary" value="我要预约" /></a>
+{foreach $rows as $row}
+    <br />
+    <a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_primary">预约信息</a>
+<div class="weui_cells weui_cells_access">
+    <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>电话</p>
+        </div>
+        <div class="weui_cell_ft">{$row.phone}</div>
+    </a>
+    <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>预约美发师</p>
+        </div>
+        <div class="weui_cell_ft">{$row.barber}</div>
+    </a>
+    <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>备注</p>
+        </div>
+        <div class="weui_cell_ft">{$row.content}</div>
+    </a>
+    <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>预约日期</p>
+        </div>
+        <div class="weui_cell_ft">{$row.date}</div>
+    </a>
+    <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>预约状态</p>
+        </div>
+        <div class="weui_cell_ft">{$row.status}</div>
+    </a>
+    <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>回复信息</p>
+        </div>
+        <div class="weui_cell_ft">{$row.reply}</div>
+    </a>
+</div>
+{/foreach}
+</body>
+</html>

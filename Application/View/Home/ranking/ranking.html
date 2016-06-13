@@ -1,0 +1,142 @@
+{extends file='index.html'}
+{block name=content}
+<!--    <div  style="text-align: center">
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <caption >充值排行榜</caption>
+    <thead>
+    <tr>
+        <th>排名</th>
+        <th>姓名</th>
+        <th>金额</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $rowr as $row}
+    <tr>
+        <td>{$row['num']}</td>
+        <td>{$row['name']}</td>
+        <td>{$row['sum']}</td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+    </div>
+    <div style="text-align: center">
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <caption>消费排行榜</caption>
+    <thead>
+    <tr>
+        <th>排名</th>
+        <th>姓名</th>
+        <th>金额</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $rowc as $row}
+    <tr>
+        <td>{$row['num']}</td>
+        <td>{$row['name']}</td>
+        <td>{$row['sum']}</td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+    </div>
+    <div style="text-align: center">
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <caption>服务之星</caption>
+    <thead>
+    <tr>
+        <th>排名</th>
+        <th>姓名</th>
+        <th>次数</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $row2 as $row}
+    <tr>
+        <td>{$row['num']}</td>
+        <td>{$row['name']}</td>
+        <td>{$row['COUNT(member_id)']}</td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+    </div>-->
+
+<!--排行榜开始-->
+<div style="height: 350px;margin-left: 20px">
+   <div style="height:300px;width: 300px;float: left;margin-right: 40px;">
+       <div class="am-panel am-panel-default">
+           <div class="am-panel-hd am-cf" data-am-collapse="{ target: '#collapse-panel-2' }">充值排行榜<span class="am-icon-chevron-down am-fr" ></span></div>
+           <div id="collapse-panel-2" class="am-in">
+               <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+                   <tbody>
+                   <tr>
+                       <th>排名</th>
+                       <th>姓名</th>
+                       <th>金额</th>
+                   </tr>
+                   {foreach $rowr as $row}
+                       <tr>
+                           <td>{$row['num']}</td>
+                           <td>{$row['name']}</td>
+                           <td>{$row['sum']}</td>
+                       </tr>
+                   {/foreach}
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </div>
+   <div style="height:300px;width: 300px;float: left;margin-right: 40px;">
+       <div class="am-panel am-panel-default">
+           <div class="am-panel-hd am-cf" data-am-collapse="{ target: '#collapse-panel-3' }">消费排行榜<span class="am-icon-chevron-down am-fr" ></span></div>
+           <div id="collapse-panel-3" class="am-in">
+               <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+                   <tbody>
+                   <tr>
+                       <th>排名</th>
+                       <th>姓名</th>
+                       <th>金额</th>
+                   </tr>
+                   {foreach $rowc as $row}
+                       <tr>
+                           <td>{$row['num']}</td>
+                           <td>{$row['name']}</td>
+                           <td>{$row['sum']}</td>
+                       </tr>
+                   {/foreach}
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </div>
+   <div style="height:300px;width: 300px;float: left;margin-right: 20px;">
+       <div class="am-panel am-panel-default">
+           <div class="am-panel-hd am-cf" data-am-collapse="{ target: '#collapse-panel-4' }">服务之星<span class="am-icon-chevron-down am-fr" ></span></div>
+           <div id="collapse-panel-4" class="am-in">
+               <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+                   <tbody>
+                   <tr>
+                       <th>排名</th>
+                       <th>姓名</th>
+                       <th>次数</th>
+                   </tr>
+                   {foreach $row2 as $row}
+                   <tr>
+                       <td>{$row['num']}</td>
+                       <td>{$row['name']}</td>
+                       <td>{$row['COUNT(member_id)']}</td>
+                   </tr>
+                   {/foreach}
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </div>
+
+</div>
+<!--排行榜结束-->
+
+{/block}

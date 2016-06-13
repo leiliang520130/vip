@@ -1,0 +1,22 @@
+{extends file='index.html'}
+{block name=content}
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <thead>
+    <tr>
+        <th style="vertical-align: middle;">code</th>
+        <th style="vertical-align: middle;">金额</th>
+        <th style="vertical-align: middle;">状态</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $rowc as $row}
+    <tr style="text-align: center;">
+        <td style="vertical-align: middle;">{$row['code']}</td>
+        <td style="vertical-align: middle;">{$row['money']}</td>
+        <td style="vertical-align: middle;">{$row['status']}</td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+{/block}

@@ -1,0 +1,87 @@
+{extends file='index.html'}
+{block name=content}
+<ol class="am-breadcrumb">
+    <li><a href="#" class="am-icon-home">首页</a></li>
+    <li><a href="#">分类</a></li>
+    <li class="am-active">内容</li>
+</ol>
+<div style="width: 500px;margin-left: 10px">
+    <div id="" style="margin-left: 20px; width: 800px;">
+        <button
+                type="button"
+                class="am-btn am-btn-primary am-btn-xs"
+                data-am-modal="{ target: '#doc-modal-add', closeViaDimmer: 0, width: 400, height: 150 }">
+            添加部门
+        </button>
+        <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-add">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd">
+                    <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                </div>
+                <div class="am-modal-bd">
+                    <form class="am-form" action="index.php?p=Admin&c=group&a=insert" method="post">
+                        <div>
+                            <label>添加部门名称</label>
+                            <input name="name" type="text" class="am-form-field am-radius" placeholder="" />
+                        </div>
+                        <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="am-table am-table-bordered am-table-radius am-table-striped">
+        <thead>
+        <tr>
+            <th>分类id</th>
+            <th>名称</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $rows as $row}
+        <tr>
+            <td>{$row['group_id']}</td>
+            <td>{$row['name']}<td>
+            <button
+                    type="button"
+                    class="am-btn am-btn-primary am-btn-xs"
+                    data-am-modal="{ target: '#doc-modal-{$row['group_id']}', closeViaDimmer: 0, width: 400, height: 150 }">
+                编辑
+            </button>
+                <a href="index.php?p=Admin&c=group&a=remove&id={$row['group_id']}" onclick="return confirm('你确定要删除?')"><button class="am-btn am-btn-default am-btn-xs">删除</button></a>
+            </td>
+        </tr>
+
+      {/foreach}
+
+        </tbody>
+    </table>
+</div>
+
+    {foreach $rows as $row1}
+
+<!--动态窗口开始-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-{$row1['group_id']}">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">修改部门
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd" style="text-align: left;">
+            <form class="am-form" action="index.php?p=Admin&c=group&a=update" method="post">
+                <div>
+                    <input type="hidden" name="group_id" value="{$row1['group_id']}"/>
+                    <input name="name"  type="text" class="am-form-field am-radius" value="{$row1['name']}"/>
+                </div>
+                <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+<!--动态窗口结束-->
+
+    {/foreach}
+
+{/block}

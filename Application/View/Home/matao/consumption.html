@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>充值排行</title>
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/0.4.2/weui.css"/>
+</head>
+<body>
+{foreach $rows as $row}
+<br />
+<a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_primary">{$row.num}</a>
+<div class="weui_cells weui_cells_access">
+    <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>姓名</p>
+        </div>
+        <div class="weui_cell_ft">{$row.name}</div>
+    </a>
+    <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>金额</p>
+        </div>
+        <div class="weui_cell_ft">{$row.sum}</div>
+    </a>
+</div>
+{/foreach}
+</body>
+</html>

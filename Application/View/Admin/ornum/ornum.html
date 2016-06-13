@@ -1,0 +1,51 @@
+{extends file='index.html'}
+{block name=content}
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <thead>
+    <tr>
+        <th style="vertical-align: middle;">订单号</th>
+        <th style="vertical-align: middle;">姓名</th>
+        <th style="vertical-align: middle;">电话</th>
+        <th style="vertical-align: middle;">服务时间</th>
+        <th style="vertical-align: middle;">状态</th>
+        <th style="vertical-align: middle;">评价</th>
+        <th style="vertical-align: middle;">评论</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $rows as $row}
+    <tr style="text-align: center;">
+        <td style="vertical-align: middle;">{$row.number}</td>
+        <td style="vertical-align: middle;">{$row.realname}</td>
+        <td style="vertical-align: middle;">{$row.phone}</td>
+        <td style="vertical-align: middle;">{$row.date}</td>
+        <td style="vertical-align: middle;">{$row.sta}</td>
+        <td style="vertical-align: middle;">{$row.evaluate}</td>
+        <td style="vertical-align: middle;">{$row.comment}</td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+<div>
+    <div class="am-fr" style="margin-right: 50px">
+        <ul class="am-pagination" style="display: inline-block">
+            <li {if $page==1}class="am-disabled"{/if}><a href="index.php?p=Admin&c=ornum&a=list&page={$page-1}">«</a></li>
+
+            {for $i=$stat to $end}
+            <li {if $page==$i}class="am-active"{/if}><a href="index.php?p=Admin&c=ornum&a=list&page={$i}">{$i}</a></li>
+            {/for}
+            <li {if $page==$total_pages}class="am-disabled"{/if}><a href="index.php?p=Admin&c=ornum&a=list&page={$page+1}">»</a></li>
+        </ul>
+        <div style="display: inline-block">
+            共{$num}条记录，到第<input id='page' type='text' size='2' name='page'>页
+            <input onclick='check()'  type='button' id='sbu' value='确定'>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function check(){
+        var oIpt=document.getElementById('page').value;
+        location.href="index.php?p=Admin&c=ornum&a=list&page="+oIpt;
+    }
+</script>
+{/block}

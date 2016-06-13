@@ -1,0 +1,90 @@
+{extends file='index.html'}
+{block name=content}
+{foreach $rows as $row2}
+<div class="am-modal am-modal-no-btn"  tabindex="-1" id="doc-modal-{$row2.order_id}1" >
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">预约状态
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd" >
+            <form class="am-form" action="index.php?p=Admin&c=orderAdmin&a=status" method="post" enctype="multipart/form-data">
+                <div>
+                    <select id="doc-select-1" name="status">
+                        <option value="成功" {if $row2.status=='成功'} {"selected='selected'"}{/if}>成功</option>
+                        <option value="失败" {if $row2.status=='失败'} {"selected='selected'"}{/if}>失败</option>
+                    </select>
+                </div>
+               <br/>
+                <div>
+                    <textarea name="reply" rows="3">{$row2['reply']}</textarea>
+                </div>
+                <input type="hidden" name="order_id" value="{$row2.order_id}">
+                <input type="hidden" name="phone" value="{$row2.phone}">
+                <input type="hidden" name="realname" value="{$row2.realname}">
+                <input type="hidden" name="date" value="{$row2.date}">
+                <p><button type="submit" class="am-btn am-btn-default" >提交</button></p>
+            </form>
+        </div>
+    </div>
+</div>
+{/foreach}
+<!--s-->
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <thead>
+    <tr>
+        <th style="vertical-align: middle;">姓名</th>
+        <th style="vertical-align: middle;">电话</th>
+        <th style="vertical-align: middle;">预约美发师</th>
+        <th style="vertical-align: middle;">备注</th>
+        <th style="vertical-align: middle;">预约日期</th>
+        <th style="vertical-align: middle;">预约状态</th>
+        <th style="vertical-align: middle;">回复信息</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $rows as $row}
+    <tr style="text-align: center;">
+        <td style="vertical-align: middle;">{$row.realname}</td>
+        <td style="vertical-align: middle;">{$row.phone}</td>
+        <td style="vertical-align: middle;">{$row.barber}</td>
+        <td style="vertical-align: middle;">{$row.content}</td>
+        <td style="vertical-align: middle;">{$row.date}</td>
+        <td style="vertical-align: middle;">{$row.status}
+           <div> <button
+                    type="button"
+                    class="am-btn am-btn-primary am-btn-xs"
+                    data-am-modal="{ target: '#doc-modal-{$row.order_id}1', closeViaDimmer: 0, width: 400, height: 320 }" >
+                更改状态
+            </button>
+               </div>
+        </td>
+        <td style="vertical-align: middle;">{$row.reply}</td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+<!--分页开始-->
+<div>
+    <div class="am-fr" style="margin-right: 50px">
+        <ul class="am-pagination" style="display: inline-block">
+            <li {if $page==1}class="am-disabled"{/if}><a href="index.php?p=Admin&c=orderAdmin&a=list&page={$page-1}">«</a></li>
+
+            {for $i=$stat to $end}
+            <li {if $page==$i}class="am-active"{/if}><a href="index.php?p=Admin&c=orderAdmin&a=list&page={$i}">{$i}</a></li>
+            {/for}
+            <li {if $page==$total_pages}class="am-disabled"{/if}><a href="index.php?p=Admin&c=orderAdmin&a=list&page={$page+1}">»</a></li>
+        </ul>
+        <div style="display: inline-block">
+            共{$num}条记录，到第<input id='page' type='text' size='2' name='page'>页
+            <input onclick='check()'  type='button' id='sbu' value='确定'>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function check(){
+        var oIpt=document.getElementById('page').value;
+        location.href="index.php?p=Admin&c=orderAdmin&a=list&page="+oIpt;
+    }
+</script>
+<!--分页结束-->
+{/block}

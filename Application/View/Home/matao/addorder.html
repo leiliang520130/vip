@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>添加预约</title>
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/0.4.2/weui.css"/>
+</head>
+<body>
+<form action="http://phpweixin.itsource.cn/team13/index.php?p=Home&c=matao&a=orderadd&name={$name}" method="post">
+    <a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_primary">添加预约</a>
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cell weui_cell_warn">
+        <div class="weui_cell_hd"><label for="" class="weui_label">电话</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="text" name="phone"  value="" placeholder="请输入电话">
+        </div>
+    </div>
+    <div class="weui_cells">
+        <div class="weui_cell weui_cell_select weui_select_after">
+            <div class="weui_cell_hd">
+                <label for="" class="weui_label">美发师</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <select class="weui_select" name="barber">
+                    {foreach $rows as $row}
+                    {if $row['member_id']==1}
+                    {continue}
+                    {/if}
+                    <option value="{$row['realname']}">{$row['realname']}</option>
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label for="" class="weui_label">日期</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" name="date" type="date" value="">
+        </div>
+    </div>
+
+    <div class="weui_cell weui_cell_warn">
+        <div class="weui_cell_hd"><label for="" class="weui_label">备注</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="text" name="content"  value="" placeholder="请输入备注">
+        </div>
+    </div>
+    <input type="submit" class="weui_btn weui_btn_primary" value="提交表单" />
+</div>
+</form>
+</body>
+</html>

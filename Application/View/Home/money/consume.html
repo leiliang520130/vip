@@ -1,0 +1,49 @@
+{extends file='index.html'}
+{block name=content}
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <thead>
+    <tr>
+        <th style="vertical-align: middle;">id</th>
+        <th style="vertical-align: middle;">类型</th>
+        <th style="vertical-align: middle;">金额</th>
+        <th style="vertical-align: middle;">消费时间</th>
+        <th style="vertical-align: middle;">消费内容</th>
+        <th style="vertical-align: middle;">余额</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $rows as $row}
+    <tr style="text-align: center;">
+        <td style="vertical-align: middle;">{$row.history_id}</td>
+        <td style="vertical-align: middle;">{$row.type}</td>
+        <td style="vertical-align: middle;">{$row.amount}</td>
+        <td style="vertical-align: middle;">{$row.time}</td>
+        <td style="vertical-align: middle;">{$row.content}</td>
+        <td style="vertical-align: middle;">{$row.remainder}</td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+<div>
+    <div class="am-fr" style="margin-right: 50px">
+        <ul class="am-pagination" style="display: inline-block">
+            <li {if $page==1}class="am-disabled"{/if}><a href="index.php?p=Home&c=money&a=list1&page={$page-1}">«</a></li>
+
+            {for $i=$stat to $end}
+            <li {if $page==$i}class="am-active"{/if}><a href="index.php?p=Home&c=money&a=list1&page={$i}">{$i}</a></li>
+            {/for}
+            <li {if $page==$total_pages}class="am-disabled"{/if}><a href="index.php?p=Home&c=money&a=list1&page={$page+1}">»</a></li>
+        </ul>
+        <div style="display: inline-block">
+            共{$num}条记录，到第<input id='page' type='text' size='2' name='page'>页
+            <input onclick='check()'  type='button' id='sbu' value='确定'>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function check(){
+        var oIpt=document.getElementById('page').value;
+        location.href="index.php?p=Home&c=money&a=list&page="+oIpt;
+    }
+</script>
+{/block}

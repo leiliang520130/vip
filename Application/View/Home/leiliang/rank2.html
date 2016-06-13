@@ -1,0 +1,51 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>排行榜</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="./Public/i/favicon1.png">
+    <link rel="apple-touch-icon-precomposed" href="./Public/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="./Public/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="./Public/css/admin.css">
+</head>
+<body>
+<div class="am-panel am-panel-default">
+    <div class="am-panel-hd am-cf" data-am-collapse="{ target: '#collapse-panel-2' }">消费排行榜<span class="am-icon-chevron-down am-fr" ></span></div>
+    <div id="collapse-panel-2" class="am-in">
+        <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+            <tbody>
+            <tr>
+                <th>排名</th>
+                <th>姓名</th>
+                <th>金额</th>
+            </tr>
+            {foreach $rows as $row}
+            <tr>
+                <td>{$row['num']}</td>
+                <td>{$row['name']}</td>
+                <td>{$row['sum']}</td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="./Public/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="./Public/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="./Public/js/amazeui.min.js"></script>
+<script src="./Public/js/app.js"></script>
+</body>
+</html>

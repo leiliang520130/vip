@@ -1,0 +1,136 @@
+{extends file='index.html'}
+{block name=content}
+<div id="" style="text-align: left;width: 800px;">
+    <button style="width: 200px;"
+            type="button"
+            class="am-btn am-btn-primary am-btn-xs"
+            data-am-modal="{ target: '#doc-modal-add', closeViaDimmer: 0, width: 400, height: 300 }">
+        添加套餐
+    </button>
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-add">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">添加套餐
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <form class="am-form" action="index.php?p=Admin&c=plans&a=insert" method="post">
+                    <div>
+                        <label for="doc-select-1">名称</label>
+                        <input name="name" type="text" class="am-form-field am-radius"/>
+                    </div>
+                    <div>
+                        <label for="doc-select-1">价格</label>
+                        <input name="money" type="text" class="am-form-field am-radius"/>
+                    </div>
+
+                    <div class="am-form-group">
+                        状态:
+                        <label class="am-radio-inline">
+                            <input type="radio" checked="checked" value="1" name="status">上线
+                        </label>
+                        <label class="am-radio-inline">
+                            <input type="radio" value="0" name="status">下线
+                        </label>
+                    </div>
+                    <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="am-table am-table-bordered am-table-striped am-table-compact">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>名称</th>
+        <th>价格</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {foreach $rows as $row}
+
+    <tr>
+        <td>{$row['plan_id']}</td>
+        <td>{$row['name']}</td>
+        <td>{$row['money']}</td>
+        <td>{$row['status']}</td>
+        <td>
+            <button
+                    type="button"
+                    class="am-btn am-btn-primary am-btn-xs"
+                    data-am-modal="{ target: '#doc-modal-{$row['plan_id']}', closeViaDimmer: 0, width: 400, height: 300 }">
+                编辑
+            </button>
+            <a href="index.php?p=Admin&c=plans&a=remove&id={$row['plan_id']}" onclick="return confirm('你确定要删除?')"><button class="am-btn am-btn-default am-btn-xs">删除</button></a>
+        </td>
+    </tr>
+
+    {/foreach}
+
+    </tbody>
+</table>
+
+{foreach $rows as $row1}
+<!--动态窗口开始-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-{$row1['plan_id']}">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">套餐管理
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd" style="text-align: left;">
+            <form class="am-form" action="index.php?p=Admin&c=plans&a=update" method="post">
+                <div>
+                    <input type="hidden" name="plan_id" value="{$row1['plan_id']}"/>
+                    <label for="doc-select-1">名称</label>
+                    <input name="name" type="text" class="am-form-field am-radius" value="{$row1['name']}" />
+                </div>
+                <div>
+                    <label for="doc-select-1">价格</label>
+                    <input name="money" type="text" class="am-form-field am-radius" value="{$row1['money']}" />
+                </div>
+
+                <div class="am-form-group">
+                    状态:
+                    <label class="am-radio-inline">
+                        <input type="radio" {if $row1['status']==1}checked="checked"{/if}  value="1" name="status">上线
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" {if $row1['status']==0}checked="checked"{/if} value="0" name="status">下线
+                    </label>
+                </div>
+                <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+            </form>
+        </div>
+    </div>
+</div>
+<!--动态窗口结束-->
+
+{/foreach}
+<!--分页开始-->
+<div>
+    <div class="am-fr" style="margin-right: 50px">
+        <ul class="am-pagination" style="display: inline-block">
+            <li {if $page==1}class="am-disabled"{/if}><a href="index.php?p=Admin&c=plans&a=list&page={$page-1}">«</a></li>
+
+            {for $i=$stat to $end}
+            <li {if $page==$i}class="am-active"{/if}><a href="index.php?p=Admin&c=plans&a=list&page={$i}">{$i}</a></li>
+            {/for}
+            <li {if $page==$total_pages}class="am-disabled"{/if}><a href="index.php?p=Admin&c=plans&a=list&page={$page+1}">»</a></li>
+        </ul>
+        <div style="display: inline-block">
+            共{$num}条记录，到第<input id='page' type='text' size='2' name='page'>页
+            <input onclick='check()'  type='button' id='sbu' value='确定'>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function check(){
+        var oIpt=document.getElementById('page').value;
+        location.href="index.php?p=Admin&c=plans&a=list&page="+oIpt;
+    }
+</script>
+<!--分页结束-->
+{/block}

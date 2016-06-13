@@ -1,0 +1,58 @@
+{extends file='index.html'}
+{block name=content}
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+                    <th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">作者</th><th class="table-author am-hide-sm-only">开始日期</th><th class="table-date am-hide-sm-only">结束日期</th><th class="table-date am-hide-sm-only">发布时间</th><th class="table-set">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $rows as $row}
+                <tr>
+                    <td>{$row['article_id']}</td>
+                    <td><a href="index.php?p=Admin&c=article&a=content&id={$row['article_id']}" target="_blank">{$row['title']}</a></td>
+                    <td>{$row['username']}</td>
+                    <td class="am-hide-sm-only">{$row['start']}</td>
+                    <td class="am-hide-sm-only">{$row['end']}</td>
+                    <td class="am-hide-sm-only">{$row['time']}</td>
+                    <td>
+                        <div>
+                                <a href="index.php?p=Admin&c=article&a=edit&id={$row['article_id']}">编辑</a> |
+                                <a href="index.php?p=Admin&c=article&a=remove&id={$row['article_id']}" onclick="return confirm('你确定要删除?')">删除</a>
+                        </div>
+                    </td>
+                </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<!--分页开始-->
+<div>
+    <div class="am-fr" style="margin-right: 50px">
+        <ul class="am-pagination" style="display: inline-block">
+            <li {if $page==1}class="am-disabled"{/if}><a href="index.php?p=Admin&c=article&a=list&page={$page-1}">«</a></li>
+
+            {for $i=$stat to $end}
+            <li {if $page==$i}class="am-active"{/if}><a href="index.php?p=Admin&c=article&a=list&page={$i}">{$i}</a></li>
+            {/for}
+            <li {if $page==$total_pages}class="am-disabled"{/if}><a href="index.php?p=Admin&c=article&a=list&page={$page+1}">»</a></li>
+        </ul>
+        <div style="display: inline-block">
+            共{$num}条记录，到第<input id='page' type='text' size='2' name='page'>页
+            <input onclick='check()'  type='button' id='sbu' value='确定'>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function check(){
+        var oIpt=document.getElementById('page').value;
+        location.href="index.php?p=Admin&c=article&a=list&page="+oIpt;
+    }
+</script>
+<!--分页结束-->
+{/block}

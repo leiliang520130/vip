@@ -1,0 +1,179 @@
+{extends file='index.html'}
+{block name=content}
+<style>
+    .am-g img{
+        width: 220px;
+        height: 220px;
+    }
+</style>
+<ul class="am-nav" style="margin-bottom: 10px;">
+    <li class="am-active"><a href="#">您当前的积分为:{$row['integral']}</a></li>
+</ul>
+<div class="am-g">
+    <div class="am-u-sm-4">
+        <div class="am-thumbnail">
+            <img src="./Public/Upload/ds.jpg" alt=""/>
+            <div class="am-thumbnail-caption">
+                <h3>创维电视30000积分</h3>
+                <button {if $row['integral'] < 30000}disabled="disabled"{/if}
+                        type="button"
+                        class="am-btn am-btn-primary"
+                        data-am-modal="{ target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225 }">
+                    立即兑换
+                </button>
+
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">收货地址
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div class="am-modal-bd">
+                            填写收货地址
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-sm-4">
+        <div class="am-thumbnail">
+            <img src="./Public/Upload/ds1.jpg" alt=""/>
+            <div class="am-thumbnail-caption">
+                <h3>小米电视28000积分</h3>
+                    <button {if $row['integral'] < 30000}disabled="disabled"{/if}
+                    type="button"
+                    class="am-btn am-btn-primary"
+                    data-am-modal="{ target: '#doc-modal-2', closeViaDimmer: 0, width: 400, height: 225 }">
+                    立即兑换
+                    </button>
+
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">收货地址
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div class="am-modal-bd">
+                            填写收货地址
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-sm-4">
+        <div class="am-thumbnail">
+            <img src="./Public/Upload/ds2.jpg" alt=""/>
+            <div class="am-thumbnail-caption">
+                <h3>海尔电视29000积分</h3>
+                <button {if $row['integral'] < 30000}disabled="disabled"{/if}
+                type="button"
+                class="am-btn am-btn-primary"
+                data-am-modal="{ target: '#doc-modal-3', closeViaDimmer: 0, width: 400, height: 225 }">
+                立即兑换
+                </button>
+
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-3">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">收货地址
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div class="am-modal-bd">
+                            填写收货地址
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-sm-4">
+        <div class="am-thumbnail">
+            <img src="./Public/Upload/sj.jpg" alt=""/>
+            <div class="am-thumbnail-caption">
+                <h3>iPhone6s    56000积分</h3>
+                <button {if $row['integral'] < 30000}disabled="disabled"{/if}
+                type="button"
+                class="am-btn am-btn-primary"
+                data-am-modal="{ target: '#doc-modal-4', closeViaDimmer: 0, width: 400, height: 225 }">
+                立即兑换
+                </button>
+
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-4">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">收货地址
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div class="am-modal-bd">
+                            填写收货地址
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-sm-4">
+        <div class="am-thumbnail">
+            <img src="./Public/Upload/sj1.jpg" alt=""/>
+            <div class="am-thumbnail-caption">
+                <h3>OPPO R9 27900积分 </h3>
+                <button {if $row['integral'] < 30000}disabled="disabled"{/if}
+                type="button"
+                class="am-btn am-btn-primary"
+                data-am-modal="{ target: '#doc-modal-5', closeViaDimmer: 0, width: 400, height: 225 }">
+                立即兑换
+                </button>
+
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-5">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">收货地址
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div class="am-modal-bd">
+                            填写收货地址
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-sm-4">
+        <div class="am-thumbnail">
+            <img src="./Public/Upload/sj3.jpg" alt=""/>
+            <div class="am-thumbnail-caption">
+                <h3>小米note3 9000积分</h3>
+                <button {if $rowUser['integral'] < 9000}disabled="disabled"{/if}
+                type="button"
+                class="am-btn am-btn-primary"
+                data-am-modal="{ target: '#doc-modal-6', closeViaDimmer: 0, width: 400, height: 225 }">
+                立即兑换
+                </button>
+
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-6">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div>
+                            <legend>本次兑换消耗积分</legend>
+
+                        </div>
+                        <div>
+                            <label>9000</label>
+                        </div>
+                        <div>
+                            <a href="index.php?p=Home&c=integral&a=exchange&id=1">
+                            <button type="button" class="am-btn am-btn-primary am-radius">确定兑换</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}

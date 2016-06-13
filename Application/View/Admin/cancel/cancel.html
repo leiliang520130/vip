@@ -1,0 +1,48 @@
+{extends file='index.html'}
+{block name=content}
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <thead>
+    <tr>
+        <th style="vertical-align: middle;">取消的预约</th>
+        <th style="vertical-align: middle;">姓名</th>
+        <th style="vertical-align: middle;">电话</th>
+        <th style="vertical-align: middle;">预约的时间</th>
+        <th style="vertical-align: middle;">操作</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $rows as $row}
+    <tr style="text-align: center;">
+        <td style="vertical-align: middle;">{$row['off_id']}</td>
+        <td style="vertical-align: middle;">{$row['username']}</td>
+        <td style="vertical-align: middle;">{$row['telephone']}</td>
+        <td style="vertical-align: middle;">{$row['time']}</td>
+        <td><a href="index.php?p=Admin&c=cancel&a=remove&id={$row['cancel_id']}" onclick="return confirm('你确定要删除?')"><button class="am-btn am-btn-primary am-btn-xs">删除</button></a></td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+<div>
+    <div class="am-fr" style="margin-right: 50px">
+        <ul class="am-pagination" style="display: inline-block">
+            <li {if $page==1}class="am-disabled"{/if}><a href="index.php?p=Admin&c=cancel&a=list&page={$page-1}">«</a></li>
+
+            {for $i=$stat to $end}
+            <li {if $page==$i}class="am-active"{/if}><a href="index.php?p=Admin&c=cancel&a=list&page={$i}">{$i}</a></li>
+            {/for}
+            <li {if $page==$total_pages}class="am-disabled"{/if}><a href="index.php?p=Admin&c=cancel&a=list&page={$page+1}">»</a></li>
+        </ul>
+        <div style="display: inline-block">
+            共{$num}条记录，到第<input id='page' type='text' size='2' name='page'>页
+            <input onclick='check()'  type='button' id='sbu' value='确定'>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function check(){
+        var oIpt=document.getElementById('page').value;
+        location.href="index.php?p=Admin&c=cancel&a=list&page="+oIpt;
+    }
+</script>
+{/block}

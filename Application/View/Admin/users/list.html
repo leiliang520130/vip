@@ -1,0 +1,249 @@
+{extends file='index.html'}
+{block name=content}
+<div>
+    <input type="text" id="search" name="search" class="am-form-field am-radius" placeholder="搜索内容" style="display: inline-block;width: 300px"/>
+    <button type="button"  onclick="search()" class="am-btn am-btn-secondary am-radius">搜索</button>
+    <script type="text/javascript">
+        function search(){
+            var oSer=document.getElementById('search').value;
+            location.href="index.php?p=Admin&c=usersAdmin&a=listuser&page={$page}&search="+oSer;
+        }
+    </script>
+</div>
+<button style="width: 200px;"
+        type="button"
+        class="am-btn am-btn-primary am-btn-xs"
+        data-am-modal="{ target: '#doc-modal-add', closeViaDimmer: 0, width: 400, height: 620 }">
+   添加用户
+</button>
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-add">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">添加用户
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <form class="am-form" action="index.php?p=Admin&c=usersAdmin&a=adduser" method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="doc-select-1">用户名</label>
+                    <input name="username" type="text" class="am-form-field am-radius" placeholder="" />
+                </div>
+                <div>
+                    <label for="doc-select-1">姓名</label>
+                    <input name="realname" type="text" class="am-form-field am-radius" placeholder="" /></div>
+                    <div>
+                        <label for="doc-select-1">电话</label>
+                        <input name="telephone" type="text" class="am-form-field am-radius" placeholder="" />
+                </div>
+                <div>
+                        <label for="doc-select-1">密码</label>
+                        <input name="password" type="password" class="am-form-field am-radius" placeholder="" />
+                </div>
+                <div class="am-form-group">
+                    <label for="doc-select-1">性别</label>
+                    <select id="doc-select-1" name="sex">
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                    <span class="am-form-caret"></span>
+                </div>
+                <div>
+                    <div>
+                        <label for="doc-select-1">备注</label>
+                       <textarea name="remark"></textarea>
+                    </div>
+                <label for="doc-select-1">头像</label>
+                <input name="file" type="file" class="am-form-field am-radius" placeholder="" />
+        </div>
+                <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <thead>
+    <tr>
+        <!--<th style="vertical-align: middle;">id</th>-->
+        <th style="text-align: center">头像</th>
+        <th style="text-align: center">用户名</th>
+        <th style="text-align: center">姓名</th>
+        <th style="text-align: center">性别</th>
+        <th style="text-align: center">电话</th>
+        <th style="text-align: center">余额</th>
+        <th style="text-align: center">vip</th>
+        <th style="text-align: center">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $rows as $row}
+    <tr style="text-align: center;">
+        <!--<td style="vertical-align: middle;" >
+            {$row.user_id}
+        </td>-->
+        <td style="vertical-align: middle;text-align: center;width:100px;"><img src="./Public/Upload/{$row.photo}" width="80px;" height="80px;" style="border-radius: 40px"></td>
+        <td style="vertical-align: middle;">{$row.username}</td>
+        <td style="vertical-align: middle;">{$row.realname}</td>
+        <td style="vertical-align: middle;">{$row.sex}</td>
+        <td style="vertical-align: middle;">{$row.telephone}</td>
+        <td style="vertical-align: middle;">{$row.money}</td>
+        <td style="vertical-align: middle;">vip{$row.is_vip}</td>
+        <td style="vertical-align: middle;">
+            <button
+                    type="button"
+                    class="am-btn am-btn-primary am-btn-xs"
+                    data-am-modal="{ target: '#doc-modal-{$row.user_id}card', closeViaDimmer: 0, width: 400, height: 160 }" >
+                充值
+            </button>
+            <button
+                    type="button"
+                    class="am-btn am-btn-default am-btn-xs"
+                    data-am-modal="{ target: '#doc-modal-{$row.user_id}cons', closeViaDimmer: 0, width: 400, height: 380 }" >
+                消费
+            </button>
+            <a href="index.php?p=Admin&c=money&a=list&id={$row['user_id']}"><button class="am-btn am-btn-primary am-btn-xs">消费记录</button></a>
+            <button
+                    type="button"
+                    class="am-btn am-btn-default am-btn-xs"
+                    data-am-modal="{ target: '#doc-modal-{$row.user_id}', closeViaDimmer: 0, width: 400, height: 620 }" >
+                编辑
+            </button>
+            <a href="index.php?p=Admin&c=usersAdmin&a=removeuser&id={$row['user_id']}" onclick="return confirm('你确定要删除?')"><button class="am-btn am-btn-primary am-btn-xs">删除</button></a>
+
+        </td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+{foreach $rows as $row1}
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-{$row1.user_id}">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">修改用户
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <form class="am-form" action="index.php?p=Admin&c=usersAdmin&a=edituser" method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="doc-select-1">用户名</label>
+                    <input name="username" type="text" class="am-form-field am-radius" placeholder="" value="{$row1.username}" />
+                </div>
+                <div>
+                    <label for="doc-select-1">姓名</label>
+                    <input name="realname" type="text" class="am-form-field am-radius" placeholder="" value="{$row1.realname}" /></div>
+                <div>
+                    <label for="doc-select-1">电话</label>
+                    <input name="telephone" type="text" class="am-form-field am-radius" placeholder="" value="{$row1.telephone}" />
+                </div>
+                <div>
+                    <label for="doc-select-1">密码</label>
+                    <input name="password" type="password" class="am-form-field am-radius" placeholder="" />
+                </div>
+                <div class="am-form-group">
+                    <label for="doc-select-1">性别</label>
+                    <select id="doc-select-1" name="sex">
+                        <option value="1" {if $row1.sex=='男'} {"selected='selected'"}{/if}>男</option>
+                        <option value="2" {if $row1.sex=='女'} {"selected='selected'"}{/if}>女</option>
+                    </select>
+                    <span class="am-form-caret"></span>
+                </div>
+                <input type="hidden" name="id" value="{$row1.user_id}">
+                <div>
+                    <div>
+                        <label for="doc-select-1">备注</label>
+                        <textarea name="remark">{$row1.remark}</textarea>
+                    </div>
+                    <label for="doc-select-1">头像</label>
+                    <input name="file" type="file" class="am-form-field am-radius" placeholder="" />
+                </div>
+                <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+            </form>
+        </div>
+    </div>
+</div>
+<!--充值-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-{$row1.user_id}card">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">充值
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <form class="am-form" action="index.php?p=Admin&c=money&a=increase" method="post" enctype="multipart/form-data">
+                <div>
+                    <input type="hidden" name="member_id" value="{$member_id}">
+                    <input type="hidden" name="user_id" value="{$row1['user_id']}"/>
+                    <input type="hidden" name="money" value="{$row1['money']}">
+                    <input type="hidden" name="type" value="充值"/>
+                    <input name="amount" type="text" class="am-form-field am-radius"/>
+                </div>
+                <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+            </form>
+        </div>
+    </div>
+</div>
+<!--消费-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-{$row1.user_id}cons">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">消费
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <form class="am-form" action="index.php?p=Admin&c=money&a=reduce" method="post" enctype="multipart/form-data">
+
+                <div class="am-form-group">
+                    <label for="doc-select-1">套餐</label>
+                    <input type="hidden" name="user_id" value="{$row1['user_id']}"/>
+                    <input type="hidden" name="money" value="{$row1['money']}">
+                    <input type="hidden" name="type" value="消费"/>
+                    <select id="doc-select-1" name="amount">
+                        {foreach $rowPlan as $plan}
+                            {if $plan['status']==0}
+                                {continue}
+                            {/if}
+                        <option value="{$plan['money']}">{$plan['name']} {$plan['money']}元</option>
+                        {/foreach}
+                    </select>
+                    <span class="am-form-caret"></span>
+                </div>
+                <div class="am-form-group">
+                    <label for="doc-select-1">服务员工</label>
+                    <select id="doc-select-1" name="member_id">
+                        {foreach $rowMenber as $member}
+                        <option value="{$member['member_id']}">{$member['realname']}</option>
+                        {/foreach}
+                    </select>
+                    <span class="am-form-caret"></span>
+                </div>
+                <div>
+                    <label for="doc-select-1">代金劵</label>
+                    <input name="code" type="text" class="am-form-field am-radius" placeholder="" />
+                </div>
+                <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+            </form>
+        </div>
+    </div>
+</div>
+{/foreach}
+<div>
+    <div class="am-fr" style="margin-right: 50px">
+        <ul class="am-pagination" style="display: inline-block">
+            <li {if $page==1}class="am-disabled"{/if}><a href="index.php?p=Admin&c=usersAdmin&a=listuser&page={$page-1}&search={$keyword}">«</a></li>
+
+            {for $i=$stat to $end}
+            <li {if $page==$i}class="am-active"{/if}><a href="index.php?p=Admin&c=usersAdmin&a=listuser&page={$i}&search={$keyword}">{$i}</a></li>
+            {/for}
+            <li {if $page==$total_pages}class="am-disabled"{/if}><a href="index.php?p=Admin&c=usersAdmin&a=listuser&page={$page+1}&search={$keyword}">»</a></li>
+        </ul>
+        <div style="display: inline-block">
+            到第<input id='page' type='text' size='2' name='page'>页
+            <input onclick='check()'  type='button' id='sbu' value='确定'>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function check(){
+        var oIpt=document.getElementById('page').value;
+        location.href="index.php?p=Admin&c=usersAdmin&a=listuser&page="+oIpt+"&search={$keyword}";
+    }
+</script>
+{/block}
